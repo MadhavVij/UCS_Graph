@@ -37,7 +37,7 @@ def uniformed_cost_search(graph, start, goal):
     #if there is no path between two nodes
     if queue.empty():
       print ('distance: infinity\nroute:\nnone')
-      print("--- %s seconds ---" % (time.time() - start_time))
+      print(f"--- {time.time() - start_time} seconds ---")
       return 
 
     cost, path = queue.get()
@@ -68,14 +68,14 @@ def get_cost(graph, from_node, to_node):
 def display_path(graph,path):
   #display in proper format
   distance = path[-1]
-  print ('distance: %s'%(distance))
+  print(f'distance: {distance}')
   print ('route: ')
   for x in path[:-2]:
     y = path.index(x)
     position = [z[0] for z in graph[x]].index(path[y+1])
     cost = graph[x][position][1]
-    print ('%s to %s, %s km' %(x,path[y+1],cost))#str(x) + ' to ' +str(path[y+1])+',' + ' '+ str(cost) + ' km' #
-  print("--- %s seconds ---" % (time.time() - start_time))
+    print(f'{x} to {path[y + 1]}, {cost} km')
+  print(f"--- {time.time() - start_time} seconds ---")
 
 def main():
   #reading all arguments
@@ -98,10 +98,7 @@ def main():
 
   #finding path and cost using Uniformed Cost Search
   path = []
-  path = uniformed_cost_search(graph, start, goal)
-
-  #Display path (if exists)
-  if path:
+  if path := uniformed_cost_search(graph, start, goal):
     display_path(graph,path)
 
 
